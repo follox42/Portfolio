@@ -1,3 +1,4 @@
+gsap.registerPlugin(ScrollToPlugin);
 /** -- Starting page writing text-- */
 function setupTypewriter(t) {
     var HTML = t.innerHTML;
@@ -61,18 +62,19 @@ function setupTypewriter(t) {
         type: type
     };
 }
-
-const getRandomNumber = (min, max) => {
-    return Math.random() * (max - min) + min
-}
-
 var typer = document.getElementById('typewriter');
 
 typewriter = setupTypewriter(typer);
 
-typewriter.type();
+typewriter.type()
 
 
+
+/** -- Canvas animation particules -- */
+
+function getRandomNumber(min, max){
+    return Math.random() * (max - min) + min
+}
 
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext("2d");
@@ -213,285 +215,249 @@ animate();
 
 
 
-
-
-const elements = document.getElementsByClassName("rect");
-Min = 60 * elements[0].offsetWidth/100;
-var an = [];
-let act;
-window.onload = function (){
-    for (let i = 0; i < elements.length; i++) {
-        an[i] = anime({
-            targets: elements[i].querySelector(".turn"),
-            rotate:[
-                { value: 90, duration: 500}
-            ],
-            width:[
-                { value: "230%", duration: 500, delay: 500}
-            ],
-            easing: 'linear',
-            autoplay: false,
-            complete: function(anim) {
-                if(anim.direction == "normal"){
-                    anim.completed = true
-                }
-                else if(anim.direction == "reverse"){
-                    anim.completed = false
-                }
-                console.log("fin")
-                
-              }
-        })
-    }
-}
-
-for (let i = 0; i < elements.length; i++) {
-    elements[i].addEventListener('mouseover', function(e) {
-        for (let r = 0; r < elements.length; r++){
-            if(r != i){
-                console.log(r)
-                if(an[r].currentTime == 0){
-                    an[r].reversed = false
-                    an[r].direction = "normal"
-                    console.log("finish")
-                }else{
-                    if(!an[r].reversed){
-                        an[r].reverse();
-                        an[r].play();
-                    }
-                    console.log("finish")
-                }
-            }
-        }
-        if(!an[i].completed){
-            if(an[i].reversed){
-                an[i].reverse();
-            }
-            an[i].play();
-        }
-    }
-    )
-}
-
-function open(i){
-    elements[i].classList.add('active')
-    let valIni = 60;
-    let valFin = 230;
-    let rotIni = 0;
-    let rotFin = 90;
-    let time;
-
-    rotIni = elements[i].getElementsByClassName("turn")[0];
-
-    values = {
-        offset: [0,0.5,1],
-        values: [{rotate: 0,width: 60},
-        {rotate: 90},
-        {width: 230}]}
-    valIni = elements[i].getElementsByClassName("turn")[0].offsetWidth;
-    valFin = valIni*230/60;
-    time = (valFin - valIni)/(valFin - Min);
-    console.log(elements[i].getElementsByClassName("turn")[0].animate)
-    animation(elements[i].getElementsByClassName("turn")[0],values,2,60)
-}
-
-function animation(object,value,time,fps,started){
-    let valFPS = 1000/fps;
-    time = time * 1000;
-    let start = 0;
-    let times = [];
-
-    //incrementor
-    let increment = ListCreator(value,valFPS,time);
-    
-
-    //set timers and all values modifies
-    for(let i=0;i < value.offset.length;i++){
-        times.push(value.offset[i] * 1000);
-    }
-    
-    //actual values of properties
-    let last = increment[0];
-
-    //aniamtion pure
-    let vl=0;
-    let timer = setInterval(function() {
-        console.log(start/valFPS)
-
-        //check beggining
-        if(start>=times[0]){
-
-            //all keys takes in times
-            for(let i=0;i<times.length;i++){
-
-                //where the time is:
-                if(start<times[i] && start>=times[i-1]){
-
-                    //each properties
-                    for(let r = 0;r<Object.keys(increment[i-1]).length;r++){
-                        console.log(increment,last)
-
-                        //width
-                        if(Object.keys(increment[i])[r] == "width"){
-                            last[`${Object.keys(increment[i])[r]}`] = Math.floor(Object.values(increment[i])[r]) + last[`${Object.keys(increment[i])[r]}`]
-                            object.style[`${Object.keys(increment[i])[r]}`] = `${last[`${Object.keys(increment[i])[r]}`]}%`;
-                            vl = vl + Math.floor(Object.values(increment[i])[r])
-                        }
-
-                        //rotate
-                        if(Object.keys(increment[i])[r] == "rotate"){
-                            last[`${Object.keys(increment[i])[r]}`] = Object.values(increment[i])[r] + last[`${Object.keys(increment[i])[r]}`]
-                            object.style[`${Object.keys(increment[i])[r]}`] = `${last[`${Object.keys(increment[i])[r]}`]}deg`;
-                        }
-
-                        //console
-                    }
-                }
-            }
-        }
-
-        if(start > times[times.length-1]){
-            clearInterval(timer)
-        }
-
-        //set time
-        start += valFPS;
-    }, valFPS);
-}
-
-
-//create incrementor
-function ListCreator(value,valFPS,time){
-    let size = 0;
-    let name = [];
-    let increment = {};
-    let times = [];
-
-    for(let i=0;i < value.offset.length;i++){
-        if(Object.keys(value.values[i]).length>size){
-            size = Object.keys(value.values[i]).length
-            name = Object.keys(value.values[i]);
-        }
-        times.push(value.offset[i] * 1000);
-    }
-
-    //each changement time
-    for(step = 0;step<value.offset.length;step++){
-        let val = {};
-
-        //each style properties
-        for(i = 0;i<size;i++){
-
-            //first properties just set them
-            if(step == 0){
-                console.log(value.values[step][name[i]],value.values[step],"ici")
-                if(value.values[step][name[i]] == undefined){
-                    if(value.values[step-1] == undefined){
-                        val[`${name[i]}`] = 0;
-                    }else{
-                        val[`${name[i]}`] = (value.values[step-1][name[i]]);
-                    }
-                }
-                else{
-                    val[`${name[i]}`] = (value.values[step][name[i]]);
-                }
-            }
-
-            //set the incrementation
-            else{
-                //last and current value
-                let p;
-                let l;
-                l = value.values[step][name[i]];
-                p = value.values[step-1][name[i]];
-
-                if(p == undefined){
-                    for(r=1;r<value.values.length;r++)
-                    {
-                        if(value.values[step-r][name[i]] !== undefined){
-                            p = increment[step-r][name[i]] 
-                            console.log(p,'la')
-                        }
-                    }
-                }
-                else{
-                    p = increment[step-1][name[i]]
-                }
-
-                if(l == undefined){
-                    l=p;
-                }
-
-                //difference
-                val[`${name[i]}`] = (l - p)*valFPS/times[step];
-            }
-        }
-        increment[step] = val
-    }
-    return increment;
-}
-
-
-
-
-
+/** -- footer animation spring -- */
 
 const footer = document.querySelector("footer");
+let isAnimating = false;
+let hasReachedTarget = false;
+let lastScrollPosition = 0;
 
-let botPos = 0;
-let AllPos = [];
-let started = false;
-const c = 12;
-const k = 180;
-const taille = footer.offsetHeight / 2;
+const getTargetScroll = () => {
+    return footer.offsetTop + (footer.offsetHeight / 2) - window.innerHeight;
+};
 
-let t = 0;
-let w = Math.sqrt(4*k-c**2)/2;
-let x = -Math.exp(-c * t /2) * (-taille * Math.cos(w * t) - (c * taille)/Math.sqrt(4*k - c**2)*Math.sin(c*t)) + footer.offsetTop + footer.offsetHeight/2;
+const animateScroll = () => {
+    if (isAnimating) return;
+    
+    isAnimating = true;
+    
+    const targetY = getTargetScroll();
+    
+    gsap.to(window, {
+        duration: 1.5,
+        scrollTo: targetY,
+        ease: "elastic.out(0.7, 0.2)",  // Moins d'amortissement = plus ample
+        onComplete: () => {
+            isAnimating = false;
+            hasReachedTarget = false; // Reset ici pour permettre une nouvelle animation
+        }
+    });
+};
 
-for(let i = 0;i < 100;i++){
-    t = i*0.01;
-    w = Math.sqrt(4*k-c**2)/2;
-    x = -Math.exp(-c * t /2) * (-taille * Math.cos(w * t) - (c * taille)/Math.sqrt(4*k - c**2)*Math.sin(c*t)) + footer.offsetTop + footer.offsetHeight/2 + 1;
-    AllPos.push(x);
-}
-console.log(AllPos);
+// Gestionnaire de scroll
+window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+    const targetScroll = getTargetScroll();
+    const isScrollingDown = currentScroll > lastScrollPosition;
 
+    if (!isAnimating && 
+        currentScroll >= targetScroll - 50 && 
+        isScrollingDown) {  // Vérifie si on scrolle vers le bas
+        animateScroll();
+    }
 
+    // Reset si on remonte suffisamment
+    if (currentScroll < targetScroll - 150) {
+        hasReachedTarget = false;
+    }
 
-window.addEventListener('wheel', (event) => {
-    console.log(event.deltaY)
-    if(event.deltaY<=1 && event.deltaY>=-1){
-        botPos = window.scrollY + window.innerHeight;
-        for(let i=0;i<AllPos.length;i++){
-            if(botPos > AllPos[i] && botPos < AllPos[i+1]){
-                console.log("ok");
-                if(started){
-                    clearInterval(repeat);
-                    started=false;
-                }
-                startAnime(i);
-            }
+    lastScrollPosition = currentScroll;
+});
+
+// Permettre de remonter
+window.addEventListener('wheel', (e) => {
+    if (e.deltaY < 0 && isAnimating) {
+        gsap.killTweensOf(window);
+        isAnimating = false;
+        hasReachedTarget = false;
+    }
+}, { passive: true });
+
+// Support tactile
+let touchStartY = 0;
+window.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+    if (isAnimating) {
+        gsap.killTweensOf(window);
+        isAnimating = false;
+        hasReachedTarget = false;
+    }
+}, { passive: true });
+
+window.addEventListener('touchmove', (e) => {
+    const touchY = e.touches[0].clientY;
+    if (touchY > touchStartY) {
+        const targetScroll = getTargetScroll();
+        if (window.scrollY < targetScroll - 100) {
+            hasReachedTarget = false;
         }
     }
-})
+}, { passive: true });
 
-function startAnime(i){
-    started = true;
-    var repeat = setInterval(() => {
-        if(i >= AllPos.length){
-            window.scroll(0,Math.floor(footer.offsetTop + footer.offsetHeight/2 - window.innerHeight));
-            console.log(i,Math.floor(footer.offsetTop + footer.offsetHeight/2 - window.innerHeight));
-            clearInterval(repeat);
-            started = false;
-        }
-        else{
-            console.log(i,Math.floor(AllPos[i] - window.innerHeight));
-            i ++;
-            window.scroll(0,Math.floor(AllPos[i] - window.innerHeight));
-        }
-    },10)
+// Gestion du redimensionnement
+window.addEventListener('resize', () => {
+    if (isAnimating) {
+        gsap.killTweensOf(window);
+        isAnimating = false;
+    }
+    const targetScroll = getTargetScroll();
+    if (window.scrollY >= targetScroll) {
+        window.scrollTo(0, targetScroll);
+    }
+});
+
+
+
+
+/** -- page2 animations -- */
+
+gsap.registerPlugin(ScrollTrigger);
+
+// Animation des tech stack
+document.querySelectorAll('.tech-stack span').forEach(tech => {
+    tech.addEventListener('mouseenter', () => {
+        gsap.to(tech, {
+            y: -3,
+            scale: 1.1,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+
+    tech.addEventListener('mouseleave', () => {
+        gsap.to(tech, {
+            y: 0,
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+});
+
+// Animation des icônes
+document.querySelectorAll('.icon-container').forEach(container => {
+    const icon = container.querySelector('.icon');
+    
+    container.addEventListener('mouseenter', () => {
+        gsap.to(icon, {
+            scale: 1.2,
+            rotation: 10,
+            duration: 0.3,
+            ease: "back.out(5)"
+        });
+    });
+
+    container.addEventListener('mouseleave', () => {
+        gsap.to(icon, {
+            scale: 1,
+            rotation: 0,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    });
+});
+
+// Animation des projets
+document.querySelectorAll('.project-item').forEach(project => {
+    const projectType = project.querySelector('.project-type');
+    const title = project.querySelector('h3');
+    
+    project.addEventListener('mouseenter', () => {
+        gsap.timeline()
+            .to(project, {
+                x: 10,
+                duration: 0.3,
+                ease: "power2.out"
+            })
+            .to(projectType, {
+                y: -5,
+                opacity: 1,
+                duration: 0.2,
+                color: '#fff5e6'
+            }, 0)
+            .to(title, {
+                y: -2,
+                duration: 0.2,
+                ease: "power2.out"
+            }, 0);
+    });
+
+    project.addEventListener('mouseleave', () => {
+        gsap.timeline()
+            .to(project, {
+                x: 0,
+                duration: 0.3,
+                ease: "power2.out"
+            })
+            .to(projectType, {
+                y: 0,
+                opacity: 0.7,
+                duration: 0.2,
+                color: 'rgba(255, 245, 230, 0.7)'
+            }, 0)
+            .to(title, {
+                y: 0,
+                duration: 0.2,
+                ease: "power2.out"
+            }, 0);
+    });
+});
+
+// Animation des skills
+document.querySelectorAll('.skill-item').forEach(skill => {
+    const bar = skill.querySelector('.skill-bar');
+    const name = skill.querySelector('.skill-name');
+    
+    skill.addEventListener('mouseenter', () => {
+        gsap.timeline()
+            .to(name, {
+                x: 10,
+                color: '#fff5e6',
+                duration: 0.3,
+                ease: "power2.out"
+            })
+            .to(bar, {
+                scaleX: 1.02,
+                duration: 0.3,
+                ease: "power2.out"
+            }, 0);
+    });
+
+    skill.addEventListener('mouseleave', () => {
+        gsap.timeline()
+            .to(name, {
+                x: 0,
+                color: 'rgba(255, 245, 230, 0.9)',
+                duration: 0.3,
+                ease: "power2.out"
+            })
+            .to(bar, {
+                scaleX: 1,
+                duration: 0.3,
+                ease: "power2.out"
+            }, 0);
+    });
+});
+
+function InitMail() {
+    // https://dashboard.emailjs.com/admin/account
+    emailjs.init({
+      publicKey: "oMtLvb-9tnUL1PCQK",
+    });
+};
+
+function sendMail(){
+    InitMail();
+    let parms = {
+        name : document.getElementById("name").value,
+        email : document.getElementById("email").value,
+        message : document.getElementById("message").value,
+    }
+    console.log(parms)
+    emailjs.send("service_r59i42m", "template_owijnbp", parms).then(alert("Email sent!!")).catch(err => console.log(err))
 }
+const submit = document.querySelector(".contact")
 
-
-
+submit.addEventListener("submit", (e) => {
+  e.preventDefault();
+})

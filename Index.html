@@ -6,176 +6,39 @@
     <title>Portfolio - Nolann</title>
     <link rel="stylesheet" href="Styles.css">
     <script src="script.js" defer></script>
-    <script src="anime.min.js" defer></script>
 </head>
 <body>
-    <div class="light"></div>
-     <div class="particules">
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-container">
-                <div class="circle"></div>
-            </div>
-        </div>
 
     <!--first page-->
-    <div class="page1">
+    <section class="page1" id="page1">
         <header>
             <nav>
-                <p>c:\\main</p>   
-                <p>&gt;</p>
-                <p>about me</p>
-                <p>&gt;</p>
-                <p>contact</p>
-                <hr class="line">
+              <a href="#page1" class="nav-item">c:\main</a>
+              <a href="#page2" class="nav-item">about me</a>
+              <a href="#page3" class="nav-item">contact</a>
+              <div class="nav-line"></div>
             </nav>
         </header>
 
+        <!-- Background Effects -->
+        <div class="light"></div>
+        <div class="particles">
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const particules = document.querySelector('.particles');
+                    // Crée 50 conteneurs de particules
+                    for(let i = 0; i < 50; i++) {
+                        const container = document.createElement('div');
+                        container.className = 'circle-container';
+                        const circle = document.createElement('div');
+                        circle.className = 'circle';
+                        container.appendChild(circle);
+                        particules.appendChild(container);
+                    }
+                });
+            </script>
+        </div>
+        
         <section class="info">
             <div class="grad">
                 <div class="num"><p>1</p></div>
@@ -200,126 +63,157 @@
 <span class="crochet">}</span></pre>
             </div>
         </section>
-    </div>
+    </section>
+
+
     <div class="back"><canvas class="transition"></canvas></div>
 
-    <!--second page-->
-    <div class="page2">
+    <!-- Page 2 -->
+    <section id="page2" class="section page2">
         <h1 class="hello">Hello world!</h1>
-        <!--<div class="left">
-            <div class="circles">
-                <div class="place">
-                    <div class="textblock active">
-                        <div class="circleAn"><p class="animation">Me</p><p class="animation">Me</p></div>
-                        <p>My name is Nolann, I'm 18 years old, and I've been passionate about programming for over 10 years. From a young age, I've always been fascinated by the world of web development and design, and today, I create and develop my own websites.</p>
-                    </div>
-                </div>
-
-                <div class="place">
-                    <div class="textblock">
-                        <div class="circleAn"><p class="animation">Goal</p><p class="animation">Goal</p></div>
-                        <p>My goal is simple: to help my clients build websites that perfectly reflect their identity, values, and vision. Each project is unique, and I make it a point to thoroughly understand my clients' needs to offer them tailored solutions.</p>
-                    </div>
-                </div>
-                <div class="place">
-                    <div class="textblock">
-                        <div class="circleAn"><p class="animation">JSP</p><p class="animation">JSP</p></div>
-                        <p>I excel in both design and development, which allows me to combine aesthetics with functionality to create websites that are beautiful, efficient, and user-friendly. My aim is that every visitor to your site immediately understands who you are and what you represent.</p>
-                    </div>
-                </div>
-            </div>
-        </div>-->
+        
         <div class="container">
-            <div class="rect">
-                <div class="rel">
-                    <div class="center">
-                        <div class="turn">
-                            <img src="images/Ellipse 20.svg" alt="">
-                            <img src="images/Ellipse 21.svg" alt="">
-                        </div>
-                        <img src="images/Line.svg" alt="" class="im">
-                        <p>Me</p>
-                        <p class="hide">fdfsdfsdfdsf</p>
+            <!-- About Card -->
+            <div class="card">
+                <div class="card-content">
+                    <div class="icon-container">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
                     </div>
-                    <div class="centerRound">    
-                        <div class="round"></div>
-                        <div class="round"></div>
-                        <div class="round"></div>
-                        <div class="round"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="rect">
-                <div class="rel">
-                    <div class="center">
-                        <div class="turn">
-                            <img src="images/Ellipse 20.svg" alt="">
-                            <img src="images/Ellipse 21.svg" alt="">
-                        </div>
-                        <img src="images/Line.svg" alt="" class="im">
-                        <p>Me</p>
-                        <p class="hide">fdfsdfsdfdsf</p>
-                    </div>
-                    <div class="centerRound">    
-                        <div class="round"></div>
-                        <div class="round"></div>
-                        <div class="round"></div>
-                        <div class="round"></div>
+                    <h2>About Me</h2>
+                    <p>Passionate about web development and creating innovative solutions.</p>
+                    <div class="tech-stack">
+                        <span data-level="Expert">JavaScript</span>
+                        <span data-level="Advanced">HTML5</span>
+                        <span data-level="Advanced">CSS3</span>
+                        <span data-level="Intermediate">React</span>
                     </div>
                 </div>
             </div>
-
-            <div class="rect">
-                <div class="rel">
-                    <div class="center">
-                        <div class="turn">
-                            <img src="images/Ellipse 20.svg" alt="">
-                            <img src="images/Ellipse 21.svg" alt="">
-                        </div>
-                        <img src="images/Line.svg" alt="" class="im">
-                        <p>Me</p>
-                        <p class="hide">fdfsdfsdfdsf</p>
+    
+            <!-- Skills Card -->
+            <div class="card">
+                <div class="card-content">
+                    <div class="icon-container">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+                        </svg>
                     </div>
-                    <div class="centerRound">    
-                        <div class="round"></div>
-                        <div class="round"></div>
-                        <div class="round"></div>
-                        <div class="round"></div>
+                    <h2>Skills</h2>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <span class="skill-name">JavaScript</span>
+                            <div class="skill-bar" style="--progress: 90%"></div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">React</span>
+                            <div class="skill-bar" style="--progress: 85%"></div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Node.js</span>
+                            <div class="skill-bar" style="--progress: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Projects Card -->
+            <div class="card">
+                <div class="card-content">
+                    <div class="icon-container">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+                        </svg>
+                    </div>
+                    <h2>Projects</h2>
+                    <div class="projects-grid">
+                        <a class="project-item" href="#">
+                            <span class="project-type">Web App</span>
+                            <h3>Portfolio</h3>
+                        </a>
+                        <a class="project-item" href="#">
+                            <span class="project-type">Mobile</span>
+                            <h3>Task Manager</h3>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="page3">
+    <!-- Page 3 -->
+    <section class="page3" id="page3">
         <div class="left">
             <h1>Contact me</h1>
             <div class="align">
                 <p>download CV</p>
-                <button href=""><img src="" alt="">Download</button>
+                <button aria-label="Download CV">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                </button>
             </div>
             <div class="cube"></div>
         </div>
 
         <div class="right">
             <div class="container">
-                <form action="" class="contact">
-                    <input type="text" name="name" placeholder="Your Name" class="inputs" req>
-                    <input type="email" name="email" placeholder="Your Email" class="inputs">
-                    <textarea name="message" placeholder="Your Message" class="textarea"></textarea>
+                <form class="contact">
+                    <input id="name" name="name" type="text" class="inputs" placeholder="Your Name">
+                    <input id="email" name="email" type="email" class="inputs" placeholder="Your Email">
+                    <textarea id="message" name="message" class="textarea" placeholder="Your Message"></textarea>
                     <div class="buttons">
-                        <button type="submit">Submit <img src="" alt=""></button>
-                        <button type="button">Open mail <img src="" alt=""></button>
+                        <button type="submit" onclick="sendMail()">
+                            Submit
+                            <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                            </svg>
+                        </button>
+                        <a href="mailto:nolann42400@gmail.com" class="button">
+                            Open mail
+                            <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </a>
                     </div>
                 </form>
             </div>
         </div>
-    </div>
+    </section>
 
+    <!-- Footer -->
     <footer>
-        <a href=""><img src="" alt="">Linkedin</a>
-        <a href=""><img src="" alt="">Mail</a>
+        <!-- Ajout des liens sociaux en position absolue -->
+        <div class="social-links">
+            <a href="www.linkedin.com/in/nolann-flavien-67a356328" target="_blank" class="social-link">
+                <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                    <rect x="2" y="9" width="4" height="12" />
+                    <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+                LinkedIn
+            </a>
+            <a href="mailto:nolann42400@gmail.com" class="social-link">
+                <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                Mail
+            </a>
+        </div>
+        <div class="footer-content">
+            <p>© 2024 Nolann - All rights reserved</p>
+        </div>
     </footer>
+
+    
+    <!-- Include the GSAP library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </body>
 </html>
